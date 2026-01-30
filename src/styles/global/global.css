@@ -24,6 +24,10 @@
 }
 
 body {
+    /*Ajustes de la fuente*/
     margin: 0;
     font-family: "Montserrat", sans-serif;
+
+    /*Configuración global*/
+    background-color: #9bc1bc;
 }
