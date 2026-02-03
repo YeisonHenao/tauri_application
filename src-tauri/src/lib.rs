@@ -1,13 +1,18 @@
-pub mod services;
-pub mod controllers;
-pub mod commands;
+mod commands;
+mod controllers;
+mod database;
+mod models;
+mod repositories;
+mod services;
+mod utils;
 
-use commands::router::register;
+use services::autentication::admin_seed::create_admin_if_not_exists;
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    create_admin_if_not_exists();
+
     tauri::Builder::default()
-        .invoke_handler(register())
+        .invoke_handler(tauri::generate_handler![commands::auth_commands::login])
         .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .expect("error running tauri");
 }
